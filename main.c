@@ -309,6 +309,82 @@ void gpaRanking()
     printf("=================================\n");
 }
 
+void sortByID()
+{
+    FILE *fp = fopen("students.dat", "rb");
+
+    if(fp == NULL)
+    {
+        printf("No Data Found!\n");
+        return;
+    }
+
+    Student students[1000];
+    int n = 0;
+
+    while(fread(&students[n], sizeof(Student), 1, fp))
+    {
+        n++;
+    }
+
+    fclose(fp);
+
+    for(int i = 0; i < n - 1; i++)
+    {
+        for(int j = i + 1; j < n; j++)
+        {
+            if(students[i].id > students[j].id)
+            {
+                Student temp = students[i];
+                students[i] = students[j];
+                students[j] = temp;
+            }
+        }
+    }
+
+    printf("\n===== STUDENTS SORTED BY ID =====\n");
+
+    for(int i = 0; i < n; i++)
+    {
+        printf("%d | %s | GPA: %.2f\n",
+               students[i].id,
+               students[i].name,
+               students[i].gpa);
+    }
+}
+
+void exportCSV()
+{
+    FILE *fp = fopen("students.dat", "rb");
+
+    if(fp == NULL)
+    {
+        printf("No Data Found!\n");
+        return;
+    }
+
+    FILE *csv = fopen("students.csv", "w");
+
+    Student s;
+
+    fprintf(csv, "ID,Name,Age,GPA\n");
+
+    while(fread(&s, sizeof(Student), 1, fp))
+    {
+        fprintf(csv,
+                "%d,%s,%d,%.2f\n",
+                s.id,
+                s.name,
+                s.age,
+                s.gpa);
+    }
+
+    fclose(fp);
+    fclose(csv);
+
+    printf("students.csv created successfully!\n");
+}
+
 int main()
 {
     int choice;
@@ -323,7 +399,9 @@ int main()
         printf("5. Delete Student\n");
         printf("6. Statistics\n");
         printf("7. GPA Ranking\n");
-        printf("8. Exit\n");
+        printf("8. Sort by ID\n");
+        printf("9. Export to CSV\n");
+        printf("10. Exit\n");
 
         printf("Enter Choice: ");
         scanf("%d", &choice);
@@ -357,6 +435,14 @@ int main()
             gpaRanking();
         }
         else if(choice == 8)
+        {
+            sortByID();
+        }
+        else if(choice == 9)
+        {
+            exportCSV();
+        }
+        else if(choice == 10)
         {
             printf("Good Bye!\n");
             break;

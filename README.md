@@ -1,33 +1,37 @@
-# Student Management System
+# Student Management System in C
 
-A console-based Student Management System developed in C.
+A console-based Student Management System built using C and File Handling.
 
 ## Features
 
-* Add Student
-* View Students
-* Search Student
-* Update Student
-* Delete Student
-* GPA Ranking
-* Statistics Dashboard
-* File Handling
+- Admin Login System
+- Change Password
+- Add Student
+- View Students
+- Search by ID
+- Search by Name
+- Update Student
+- Delete Student
+- Statistics Dashboard
+- GPA Ranking
+- Top 5 Students
+- Failed Students List
+- Grade System
+- Student Report Card
+- Export to CSV
 
 ## Technologies Used
 
-* C Programming
-* GCC Compiler
-* VS Code
-
-## How to Compile
-
-```bash
-gcc main.c -o sms.exe
-```
+- C Programming
+- Structures
+- File Handling
+- Sorting Algorithms
+- Searching Algorithms
 
 ## How to Run
 
 ```bash
+gcc main.c -o sms.exe
 .\sms.exe
 ```
 
